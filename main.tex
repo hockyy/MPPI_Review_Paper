@@ -1,0 +1,294 @@
+\documentclass[12pt, a4paper, final]{article}
+
+\usepackage[margin=0.7in, bottom=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{url}
+\urlstyle{same}
+\usepackage{titling}
+\usepackage{lipsum}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{amsthm}
+\usepackage{natbib}
+
+% boild math
+\usepackage{bm}
+
+\newcommand\onlyb[1]{\normalfont{\textbf{#1}}}
+\newcommand\noSty[1]{\normalfont{#1}}
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{definition}[theorem]{Definisi}
+\newtheorem{proposition}[theorem]{Proposisi}
+
+% Bibliography stuffs i believe
+\usepackage[bahasa]{babel}
+\usepackage[fixlanguage]{babelbib}
+
+% Bold extra
+\usepackage{bold-extra}
+
+% Image floating
+\usepackage{float}
+
+% Image subfigure
+\usepackage{caption}
+\usepackage{subcaption}
+
+% Code highlight
+\usepackage[newfloat]{minted}
+\usepackage{xcolor} % to access the named colour LightGray
+\definecolor{LightGray}{gray}{0.9}
+
+% Pseudocode
+\usepackage[ruled,linesnumbered]{algorithm2e}
+\renewcommand*{\algorithmcfname}{Algoritma}
+\SetKwInput{KwData}{Masukan}
+\SetKwInput{KwResult}{Keluaran}
+
+\usepackage{multirow}
+\usepackage{multicol}
+
+% Separator length in itemize
+\usepackage{enumitem}
+
+\begin{document}
+\begin{center}
+    \Large
+    \textbf{Ulasan Perkembangan Pemungutan Suara Elektronik\\}
+    \vspace{0.2cm}
+    \Large
+    Hocky Yudhiono – 1906285604 --
+    \texttt{hocky.yudhiono@ui.ac.id}\\
+    \vspace{0.2cm}
+    \large
+    Tugas Mandiri 3 -- Metodologi Penelitian dan Penulisan Ilmiah Kelas F\\
+    Fakultas Ilmu Komputer, Universitas Indonesia\\
+\end{center}
+
+\onehalfspacing
+
+% \begin{multicols}{2}
+% [
+\section{Pendahuluan}
+% ]
+
+Pemungutan suara merupakan proses pengumpulan pendapat berdasarkan suara mayoritas untuk menentukan pilihan bersama yang menjadi alternatif bagi musyawarah. Digunakannya media elektronik dalam pemungutan suara mulai diterima masyarakat karena kemudahannya dalam aspek aksesibilitas. Namun, sebagian metode pemungutan suara elektronik saat ini masih memiliki kekurangan dari segi privasi, keamanan dan akuntabilitas \citep{7571928}. 
+
+Pemungutan suara elektronik atau \textit{e-voting}, baik melalui internet atau hanya memanfaatkan teknologi sebagai media verifikasi dan penyimpanan hasil pemungutan suara sudah pernah diimplementasikan dalam pemilihan umum nasional di berbagai negara \citep{7001135}, dan justru tidak jarang diimplementasikan oleh berbagai negara berkembang \citep{reviewevote}. Salah satunya adalah Nigeria, berdasarkan laporan pasca-pemilu, penggunaan \textit{e-voting} dipercaya lebih kredibel dan mengurangi risiko terjadinya manipulasi \citep{nigeria}. Lain halnya dengan Brazil, terdapat beberapa isu terkait keterbukaan dan transparansi pihak pemerintah yang beredar di masyarakat \citep{avgerou}. Fakta bahwa jutaan masyarakat Brazil masih belum mampu mengakses teknologi internet untuk pemilihan umum yang bersifat global, juga menjadi salah satu masalah bagi keputusan pemerintah di sana \citep{mci/Filho2008}.
+
+Selain itu terdapat beberapa isu lain, baik minor maupun fatal yang muncul dalam pemilihan-pemilihan umum yang pernah dilaksanakan di berbagai negara. Salah satunya ialah transparansi kepada masyarakat, keamanan terhadap manipulasi, dan kurangnya literasi penduduk terhadap aturan dan teknologi canggih yang digunakan dalam sistem pemungutan suara elektronik ini \citep{7001136}. Hal ini membuka berbagai peluang bagi para ilmuwan untuk terus mencari mekanisme-mekanisme \textit{e-voting} yang lebih baik.
+
+Dari berbagai metode pemungutan suara elektronik yang ada, sebagian besar basis data masih terpusat pada pemerintah. Hal ini merupakan salah satu faktor yang dapat menyebabkan berkurangnya tingkat kepercayaan masyarakat, yang berbeda dengan \textit{voting} secara langsung dan transparan apabila menggunakan surat suara fisik \citep{8651451}. Terdapat beberapa solusi yang ditawarkan oleh para peneliti, salah satunya ialah teknologi \textit{blockchain} yang terdesentralisasi.
+
+\section{Metodologi}
+
+Penulis mengulas topik pemungutan suara elektronik berdasarkan delapan buah literatur utama dalam kurun waktu lima tahun terakhir, dengan beberapa literatur lain sebagai tambahan informasi sebagaimana terlampir pada bagian pustaka. Proses pengumpulan dan ulasan data dilakukan dengan sintesis literatur. Tulisan ini diharapkan dapat menjawab rumusan masalah sebagai berikut.
+\begin{enumerate}
+    \setlength\itemsep{-0.5em}
+    \item Apa definisi dan bagaimana mengategorikan pemungutan suara elektronik atau \textit{e-voting}?
+    \item Apa hambatan dan syarat suatu sistem tersebut dapat diaplikasikan dan dikatakan baik?
+    \item Apa teknologi-teknologi yang dapat digunakan dalam membuat sistem \textit{e-voting} ini?
+\end{enumerate}
+\section{Pembahasan}
+
+\subsection{Pemungutan Suara dan Variasi Penerapannya}
+
+Hak untuk memilih orang-orang yang menduduki jabatan dalam memimpin suatu bangsa dijunjung tinggi bagi beberapa negara. Salah satunya ialah dengan melakukan pemungutan suara skala besar, yang dikenal dengan pemilihan umum atau pemilu. Demokrasi sudah menjadi tradisi yang berlangsung selama lebih dari 2500 tahun \citep{hansen2005tradition, review1}. Sejak berkembangnya teknologi komputer, berbagai metode yang memudahkan pemungutan suara terus berkembang. Mulai dari sistem pencatatan, publikasi, maupun menjadi suatu sistem pemungutan suara yang bisa dilakukan secara jarak jauh dari tempat masing-masing.
+
+\cite{review1} dalam artikelnya \textit{The Development of Remote E-Voting around the World:  A Review of Roads and Directions} mengategorikan bentuk pemungutan suara berdasarkan media dan tempatnya menjadi lima kelompok, yang diilustrasikan dalam tabel berikut.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Lingkungan} & \textbf{Dikendalikan}   & \textbf{Bebas}      \\ \hline
+\textbf{Tangan}     & Langsung                & -                   \\ \hline
+\textbf{Kertas}     & Tempat Pemungutan Suara & \textit{Postal Voting}     \\ \hline
+\textbf{Elektronik} & Mesin Pemungutan Suara  & Aplikasi Jarak Jauh \\ \hline
+\end{tabular}
+\caption{Bentuk Pemungutan Suara}
+\end{table}
+
+Tentunya \textit{e-voting} akan sulit dilaksanakan secara utuh untuk setiap masyarakat \citep{7001136}. Sebagian besar sistem pemilu masih menggunakan metode alternatif, yaitu surat suara di tempat pemungutan suara untuk memfasilitasi masyarakat yang tidak dapat menyampaikan suaranya dengan media elektronik.
+
+\textit{E-voting} pernah dimanfaatkan oleh Perancis dalam rangka pemilihan umum anggota legislatifnya pada tahun 2012, namun hanya untuk masyarakatnya yang tinggal di luar negeri \citep{france}. Adanya metode \textit{hybrid} ini menjadi tantangan tersendiri untuk menjaga terjadinya suara ganda yang diberikan oleh seorang pemilih. Untuk Indonesia, masyarakat yang tinggal di luar negeri diberikan kesempatan memilih melalui tempat pemungutan suara pada Kedutaan Besar Republik Indonesia di negara tempatnya berada.
+
+\cite{Pujiatin_2021} mencatat bahwa terdapat empat masalah utama yang dihadapi oleh para pemilih di Jepang pada pemilu 2019 lalu. Antara lain ialah menghabiskan terlalu banyak waktu, manajemen dan organisasi tempat pemungutan suara yang kurang persiapan, kurangnya informasi, dan proses pendaftaran pemilihan umum yang harus dilakukan secara mandiri.
+
+\subsection{E-Voting}
+
+Definisi dari pemungutan suara elektronik sangat luas dan variannya berbeda-beda. Dalam tulisan ini, \textit{e-voting} ialah metode pemungutan suara yang dalam prosesnya menggunakan perangkat elektronik.
+
+Pemungutan suara jarak jauh yang bersifat elektronik, atau yang biasa dikenal dalam beberapa artikel sebagai \textit{internet voting} atau \textit{i-voting} dianggap berbeda dengan \textit{e-voting}. Pada beberapa artikel \textit{e-voting} dianggap sebagai sebuah metode pemungutan suara dengan setiap pemilih tetap harus mengunjungi tempat pemungutan suara, namun tidak menggunakan balot, melainkan melalui mesin yang terhubung ke internet. Sementara pada \textit{i-voting}, pemilih tidak perlu pergi ke tempat pemungutan suara. Proses verifikasi bisa dilakukan menggunakan perangkat pribadi masing-masing \cite{8651451}. \cite{review1} mengategorikan \textit{e-voting} berdasarkan lima aspek. Antara lain sebagai berikut.
+
+\subsubsection{Tingkatan Pemilu}
+
+Dari tingkatannya, \textit{i-voting} terdiri dari tingkatan nasional, regional, asosiasi, kelompok kecil, dan simulasi pencobaan. Tingkatan regional di sini biasanya mencakup dalam pemilihan umum suatu daerah seperti provinsi atau kota tertentu. Pada pemilihan yang bersifat nasional dan regional cenderung digunakan untuk memliih pejabat pemerintahan. Sementara untuk pemilihan asosiasi pada umumnya digunakan untuk memilih pemimpin dalam suatu organisasi atau perusahaan.
+
+\subsubsection{Kanal dan Media}
+
+Pemungutan suara yang dilakukan, ada yang bersifat elektronik secara penuh dan ada pula yang masih menyediakan pemungutan suara langsung sebagai alternatif.
+
+\subsubsection{Metode Identifikasi}
+
+Beberapa metode identifikasi yang umum digunakan ialah nama pengguna dan kata sandi, kode identifikasi atau nomor transaksi, biometrik, KTP, serta nomor telepon.
+
+\subsubsection{Anonimitas}
+
+Salah satu aspek yang harus dipertahankan dalam pemilihan umum ialah proses anonimitas, antara lain sebagai berikut.
+
+\begin{itemize}
+    \setlength\itemsep{-0.5em}
+    \item \textbf{Masa sebelum pemilihan}, setiap calon pemilih akan diberikan sebuah nomor transaksi yang dapat digunakan sebagai tanda melakukan pemilihan nantinya. Nomor tersebut akan diberikan untuk setiap orang dan tidak akan disimpan siapa yang memiliki suatu nomor tertentu. Pemerintah harus memastikan bahwa setiap orang mendapatkan atau menggunakan tepat satu nomor. Praktik ini rentan terhadap penyalahgunaan surat suara. Pemerintah tidak dapat menjamin bahwa pemilu bebas dari penjualan atau penggunaan nomor milik orang lain.
+    \item \textbf{Masa selama pemilihan}, metode ini dilakukan dengan memisahkan layanan server yang memverifikasi dan menyimpan hasil pemungutan suara, atau bisa pula menggunakan teknik kriptografi yang dikenal dengan \textit{blind signatures}. Bahwa konten diverifikasi oleh pihak yang dipercaya tanpa tahu apa isinya, namun pihak tersebut yakin bahwa isinya adalah valid.
+    \item \textbf{Masa setelah pemilihan}, anonimitas dijaga setelah hari pemilihannya selesai. Setiap suara yang tersimpan pada server masih bisa dilacak yang memberinya, namun saat penghitungan suara, setiap suara tersebut akan dihilangkan pemiliknya. Teknik enkripsi yang digunakan harus menjamin bahwa setiap orang tidak mengetahui isi dari hasil \textit{voting} seseorang, tapi sistem harus menjamin bahwa hasil pemilihan tersebut valid.
+\end{itemize}
+
+\subsubsection{Besar Jangkauan Eleksi}
+
+Jangkauannya dapat dibagi menjadi tiga kategori, yaitu $> 30000$, di antara $3000$ dan $30000$, serta $< 3000$.\\
+
+Dari beberapa kategori dan jenis dari pemungutan suara elektronik yang telah dipaparkan. \cite{review1} mengidentifikasi 139 kasus pada 16 negara berbeda dari jangka waktu 1996 hingga 30 April 2007, dengan data valid sebesar 104 data. Secara ringkas, jenis pemungutan suara elektronik mayoritas dari aspek tingkatan, kanal, metode identifikasi, anonimitas, dan besarnya jangkauan berturut-turut ialah regional $(36.5\%)$, kertas dan elektronik $(62.5\%)$, kode identifikasi $(81.5\%)$, masa sebelum pemilihan $(50.9\%)$, dan $< 3000$ pemilih $(62.4\%)$.
+
+\subsection{Hambatan dan Syarat Kebutuhan E-Voting}
+
+Secara umum, terdapat dua aspek yang harus dilindungi dalam pemungutan suara, yaitu anonimitas dan kepercayaan. Anonimitas berarti suara yang diberikan harus bersifat anonim. Tidak boleh ada cara untuk suatu pihak, baik pemerintah maupun perorangan mencari tahu siapa yang memberikan suara untuk kandidat tertentu, baik selama maupun sesudah penghitungan suara dilakukan. Sehingga, tidak ada yang bisa memberikan ancaman atau pun perlakuan khusus terhadap suatu kelompok pemilih \citep{sysreview}.
+
+Selanjutnya, adanya kepercayaan yang mutlak dan transparan terhadap sistem. Sistem harus memastikan bahwa setiap suara dihitung dengan aman dan akurat, serta dapat dimengerti oleh semua kalangan bahwa sistem tersebut dapat dipercaya dan cara kerjanya dapat dipertanggungjawabkan \citep{wang2017review}.
+
+Kedua aspek ini memang tidak bisa dicapai sepenuhnya dalam pemungutan suara secara langsung tanpa media elektronik, namun usaha yang dilakukan untuk memanipulasi hasilnya akan jauh lebih sulit dilakukan karena pengawasan dalam setiap cabangnya yang cenderung terbuka dan melibatkan banyak pihak secara transparan \citep{wang2017review}.
+
+Secara teori, sebuah komputer dapat menjalankan sistem dengan kode sumber yang terlihat oleh semua orang. Namun dalam praktiknya hal tersebut sulit dilakukan \cite{10.1007/3-540-57220-1_66}. Program aplikasi yang digunakan akan dimuat dalam suatu tempat penyimpanan sederhana yang tidak diawasi. Memastikan bahwa perangkat lunak yang terpasang dalam suatu sistem dapat dipercaya dan dalam proses perhitungannya akurat merupakan salah satu hambatan juga \citep{7571928}.
+
+Masalah selanjutnya ialah proses pemindahan hasil suatu mesin pemungutan suara ke basis data yang terpusat. Terdapat beberapa solusi yang mungkin bisa dilakukan, yang pertama ialah dengan menyegel mesin tersebut secara seluruhnya dan memindahkannya secara langsung dari tempat pemungutan suara. Namun hal ini akan sulit dilakukan dalam skala besar \citep{sysreview}. Apabila hanya hasil saja yang dilaporkan melalui internet, maka tidak menutup kemungkinan hasil tersebut dapat diganggu melalui berbagai serangan internet. Proses keamanan dan enkripsi yang rumit harus pula dijelaskan pada masyarakat sehingga mereka dapat dengan penuh mempercayai sistem yang digunakan untuk memindahkan hasil dari pemungutan suara \citep{reviewevote}.
+
+Sistem pusat yang mencatat hasil pemilihan secara keseluruhan juga dapat menjadi masalah. Sistem ini pada umumnya dibuat tersentralisasi dan tidak terbuka untuk umum. Masyarakat akan sulit mengetahui proses apa yang terjadi di dalamnya dan apakah proses penghitungan suara dilakukan dengan benar.
+
+Penyerangan terhadap sistem \textit{i-voting} juga tidak bisa dihindari. Pemerintah tidak dapat memastikan bahwa setiap perangkat yang digunakan oleh pemilih memiliki spesifikasi yang sama \citep{mci/Filho2008}. Apabila sebagian besar perangkat diserang bersamaan untuk mengubah suara, penyerangan ini akan sulit dideteksi. Tidak menutup kemungkinan pula serangan politik ini dilakukan oleh negara lain yang berupaya untuk mengacaukan sistem pemerintahan suatu negara.
+
+\cite{comparitiveanalysis} menyampaikan beberapa tantangan kontemporer yang harus dipenuhi bagi suatu sistem pemungutan suara elektronik, yaitu privasi, memastikan suara tidak di bawah pengaruh orang lain, menghindari relasi antar suara dan identitas, kemudahan akses, skalabilitas, kecepatan, dan biayanya terjangkau bagi suatu negara.
+
+Selain itu, \cite{wang2017review} juga mencatat beberapa kebutuhan inti yang harus dipenuhi oleh suatu sistem pemungutan suara elektronik, antara lain sebagai berikut.
+
+\begin{itemize}
+    \setlength\itemsep{-0.5em}
+    \item Setiap suara harus dihitung dengan tepat dan setiap suara sudah terverifikasi sebelumnya.
+    \item Tidak ada orang lain yang dapat mengetahui pilihan sang pemilih kecuali dirinya sendiri.
+    \item Tidak ada orang yang memilih lebih dari sekali.
+    \item Autentikasi dan kelayakan pemilih yang terjamin.
+    \item Dapat bertahan dari penyerangan dan beban layanan sistem.
+    \item Pemilih dapat mengetahui apakah suaranya terhitung atau tidak.
+    \item Terjangkau dan dapat digunakan oleh setiap kalangan pemilih.
+\end{itemize}
+
+Ada pula beberapa syarat tambahan yang membuat sistem tersebut menjadi lebih baik.
+
+\begin{itemize}
+    \setlength\itemsep{-0.5em}
+    \item Hasil parsial tidak keluar sebelum periode pemilihan selesai.
+    \item Tidak bisa dilakukan praktik jual-beli suara.
+    \item Efisien dari segi komputasi.
+    \item Dapat diakses menggunakan berbagai perangkat.
+    \item Dapat diverifikasi umum dan ada bukti transaksi.
+\end{itemize}
+
+\cite{8651451} menyampaikan beberapa faktor yang menyebabkan rendahnya kepercayaan masyarakat terhadap pemerintah, antara lain sebagai berikut.
+
+\begin{itemize}
+    \setlength\itemsep{-0.5em}
+    \item Manipulasi sebelum pemungutan suara yang membuat suatu kelompok orang atau pribadi tidak dapat memberikan suaranya.
+    \item Adanya sistem yang memastikan tidak terjadinya duplikasi suara.
+    \item Praktik penyuapan atau ancaman untuk memengaruhi pilihan suara seseorang.
+    \item Kurangnya transparansi, pengawasan, dan sulitnya permohonan banding apabila terjadi masalah dalam penghitungan suara.
+    \item Kurangnya ketertarikan dan antusias dari masyarakat.
+\end{itemize}
+
+Masalah-masalah tersebut harus bisa dicegah apabila menggunakan pemungutan suara elektronik.
+
+\subsection{Teknologi-Teknologi dalam Sistem E-Voting}
+
+Berbagai algoritma \textit{e-voting} yang dikembangkan dewasa ini dan menjadi \textit{state-of-the-art} dalam perkembangannya melibatkan enkripsi dan kriptografi. Salah satu teknik, yaitu \textit{blockchain} yang digunakan dalam \textit{cryptocurrency} pun kian diadaptasi untuk dapat mendukung kebutuhan pemungutan suara elektronik \citep{8651451}. Algoritma-algoritma tersebut digunakan untuk mencapai suatu sistem pemungutan suara elektronik yang aman, namun juga tidak menutup kemungkinan satu atau lebih algoritma dikombinasikan atau digunakan bersamaan. Beberapa algoritma yang umum diteliti antara lain ialah sebagai berikut.
+
+\subsubsection{Hashing}
+
+\textit{Hashing} merupakan fungsi satu arah untuk mencari sebuah nilai kode cacahan yang merepresentasikan suatu data. Nilai ini biasanya dapat disimpan atau pun digunakan untuk memastikan validitas suatu data. Salah satu aplikasinya ialah dalam bertransaksi suatu data. Nilai cacahan akan diberikan beserta data tersebut. Untuk memastikan bahwa data tidak diubah, setiap orang dapat menerapkan \textit{hashing} pada data tersebut dan membandingkan apakah nilai cacahannya bernilai sama.
+
+\subsubsection{Asymmetric Encryption}
+
+Teknik kriptografi ini dikenal pula dengan \textit{public-key cryptography}. Berbeda dengan enkripsi simetrik, yang dalam proses dekripsinya menggunakan suatu kata sandi yang sama. Pada dasarnya setiap orang akan memiliki sebuah \textit{private key} yang tidak boleh disebar, serta memiliki suatu \textit{public key} yang dapat digunakan oleh orang lain. Orang lain dapat menggunakan \textit{public key} tersebut untuk mengenkripsi data yang akan dikirimkan. Hanya orang yang dituju yang dapat mendekripsi data tersebut dengan \textit{private key}-nya.
+
+Selain itu, \textit{asymmetric encryption} dapat pula digunakan untuk melakukan \textit{signature}. \textit{Signature} ialah melakukan suatu tanda tangan digital terhadap suatu data oleh seseorang yang memiliki sebuah \textit{private key}, kemudian orang lain dapat memverifikasi data yang sudah ditandatangani tersebut dengan mencocokkan \textit{public key}-nya terhadap data yang sudah ditandatangani \citep{pubkey}.
+
+Dalam aplikasinya, terdapat beberapa algoritma yang sering digunakan, antara lain RSA (Rivest–Shamir–Adleman) yang memanfaatkan sifat perpangkatan dari dua buah bilangan bulat dimodulo suatu bilangan lain. Komputasi ini mudah dilakukan untuk komputer, namun komputasi inversnya lebih sulit dari segi kompleksitas waktu. Sehingga penyerangan akan sulit dilakukan, karena pada dasarnya penyerang harus melakukan pemfaktoran bilangan bulat dari perkalian dua bilangan prima yang sangat besar, dan secara teori akan membutuhkan waktu yang sangat lama untuk dilakukan.
+
+Selain itu, ada pula algoritma ECC (Elliptical Curve Cryptography) yang memanfaatkan sifat kurva eliptik dalam suatu \textit{field} atau medan terbatas, umumnya himpunan bilangan bulat dengan operasi perhitungan modulo prima. Penghitungan berapa langkah yang dibutuhkan untuk mencapai suatu titik melalui serangkaian operasi tertentu yang akan mengunjungi setiap titik pada medan tersebut akan membutuhkan waktu yang lama untuk diserang. Namun komputasi verifikasinya tidak selama algoritma RSA. Dalam pemungutan suara elektronik, algoritma ini cenderung lebih bisa diandalkan karena latensinya yang lebih rendah \citep{mahto2017rsa}.
+
+\subsubsection{Blockchain}
+
+\textit{Blockchain} merupakan suatu jurnal catatan umum \textit{(ledger)} terdistribusi dan terdesentralisasi, yang dikelola oleh sebuah jaringan \textit{peer-to-peer}. \textit{Blockchain} bekerja seperti suatu riwayat transaksi yang tersusun dari rantai berurut \textit{block}-\textit{block} yang tidak dapat berubah setelah masuk ke dalam \textit{blockchain}. Setelah suatu \textit{block} dicatat, semua \textit{block} lain yang ditambahkan setelah \textit{block} tersebut akan dipengaruhi nilai cacahan atau \textit{hashing}-nya. Sehingga tidak mungkin untuk mengubah isi dari transaksi yang terdapat pada setiap \textit{block} di dalam \textit{blockchain} \citep{koreanevoting}.
+
+Adanya transparansi dalam jaringan \textit{blockchain} ini dipercaya dapat mengarahkan pada suatu sistem pemungutan suara elektronik yang kredibel. Selain itu, jaringan yang terdesentralisasi membuat sistem yang ada tidak hanya mengandalkan pemerintah pusat, sehingga bisa mencegah adanya tindakan kecurangan pada proses penghitungan hasil pemungutan suara \citep{blockchain}.
+
+Namun \textit{blockchain} saja tidak dapat memenuhi aspek anonimitas dalam pemungutan suara. Diperlukan adanya metode lain, seperti \textit{homomorphic encryption}, \textit{ring signature}, dan \textit{blind signature} yang diperlukan untuk memastikan bahwa pemungutan suara dengan \textit{blockchain} ini menjaga privasi para pemilih. \citep{koreanevoting}.
+
+\subsubsection{Homomorphic Encryption}
+
+\textit{Homomorphic encryption} adalah jenis enkripsi yang mengizinkan adanya komputasi pada suatu data yang dienkripsi. Dalam konteks pemungutan suara, \cite{end2end} menyampaikan suatu teknik yang dapat digunakan untuk menghitung hasil tanpa melanggar aspek anonimitas. Setiap pemilih akan diberikan suatu nomor transaksi bukti pemilihan terenkripsi yang tidak bisa didekripsi secara langsung oleh siapa pun \citep{homomorphic2}.
+
+Namun, enkripsi tersebut dapat diproses dengan nomor enkripsi lain untuk mendapatkan hasil akhir jumlah suara oleh sistem tanpa melalui proses dekripsi terlebih dahulu. Lebih tepatnya, hasil dari komputasi data yang terenkripsi sama dengan enkripsi dari hasil komputasi data yang tidak terenkripsi. Namun, salah satu kekurangan dari teknik ini ialah kebutuhan media penyimpanan yang besar dan komputasinya yang lambat, serta kecenderungan untuk adanya kesalahan dalam hasil komputasi untuk data yang besar. \citep{homomorphic1} 
+
+\subsubsection{Blind Signature}
+
+Dalam suatu sistem pemungutan suara elektronik, setiap kertas suara haruslah diverifikasi identitasnya oleh petugas pemungutan suara yang berwajib. Namun, ini akan melanggar asas anonimitas, karena bisa saja pihak yang memverifikasi mengetahui calon yang dipilih. Teknik \textit{blind signature} yang ditemukan oleh \cite{mixnet} dapat digunakan untuk meminta \textit{signature} verifikator surat suara dan kelayakan pemilihan, tanpa melihat isinya. Kemudian surat suara tersebut dapat diberikan pada tempat pengumpulan suara tanpa identitas, namun sudah mendapatkan tanda tangan dari pihak verifikator.
+
+\subsubsection{Secret Sharing}
+
+\textit{Secret sharing} merupakan salah satu metode untuk mencari tahu suatu nilai asli dari enkripsi yang membutuhkan setidaknya sejumlah $K$ pihak untuk mengumpulkan \textit{key}-nya. \cite{secretsharing3} menyampaikan suatu metode yang memanfaatkan sifat interpolasi polinomial derajat $K$ yang membutuhkan $K+1$ titik untuk mendapatkan fungsinya. Selain itu, polinomial ini memiliki properti \textit{homomorphic} yang dapat dimanfaatkan dalam enkripsi pemungutan suara elektronik.
+
+\subsubsection{Mix-net}
+
+Pada dasarnya melakukan enkripsi beberapa kali terhadap surat suara oleh pihak pengenkripsi sehingga identitas asal dari suara tersebut tidak dapat dilacak dari pusat. Namun metode ini lebih dihindari karena membutuhkan bukti transaksi bagi pemilih, yang melanggar salah satu kebutuhan anonimitas \textit{e-voting} \citep{mixnet}.
+
+\subsubsection{Anonymous Submission}
+
+Setiap pemilih akan memilih suatu posisi mesin secara acak, dan tidak diketahui oleh siapa pun. Pemilih kemudian akan memberikan suaranya pada posisi tersebut, dan akan memberikan suatu surat suara palsu (yang tidak dianggap valid) pada mesin lain. Pada proses penghitungan, setiap pemilih dapat melakukan dekripsi pada surat suaranya untuk memastikan bahwa suaranya terhitung \citep{anonsus}.
+
+\subsubsection{Zero-knowledge Proof}
+
+Protokol ini umumnya digunakan pada \textit{cryptocurrency}. Pada dasarnya ialah pembuktian bahwa suatu pihak mengetahui suatu rahasia tanpa memberikan rahasia tersebut kepada verifikator. Dalam \textit{e-voting}, ini bisa dimanfaatkan untuk memberi tahu kepada pemilih bahwa suaranya terhitung tanpa memberi tahu informasi lebih \cite{zeroknow}. Selain itu, bisa pula digunakan untuk memastikan bahwa pemilih memilih tepat satu kandidat tanpa memberikan informasi calon pilihannya.
+
+Implementasi dari \textit{zero-knowledge proof} bisa berbeda-beda. Namun tetap mengikuti tiga kriteria, yaitu kebenaran fakta, berarti bila protokol tersebut dipatuhi, maka akan mencapai bukti yang valid. Kedua ialah apabila pihak mana pun yang tidak mengetahui rahasianya, tidak akan bisa membuktikannya dengan protokol tersebut. Terakhir ialah tidak ada informasi tambahan yang didapatkan oleh pemilih, selain informasi yang ingin dibuktikan \citep{zeroknow2}. 
+
+\subsubsection{Deniable Signature / Designated Verifier Signature}
+
+\textit{Deniable signature} merupakan mekanisme untuk melakukan \textit{signature} terhadap suatu kertas suara sehingga bisa diverifikasi dengan valid oleh verifikator yang memiliki izin. Namun pemilih bisa membuat suatu pesan berbeda dengan \textit{signature} yang sama, sehingga orang lain tidak dapat membuktikan keaslian isi pesan dari \textit{signature} tersebut. Metode ini dibuat untuk mencegah penyerangan terhadap privasi pemilihan seseorang \cite{deniable}.
+
+\section{Kesimpulan}
+
+Pemilihan umum dengan pemungutan suara merupakan salah satu kegiatan yang cukup fundamental bagi negara-negara demokrasi. Adanya perkembangan teknologi membolehkan kegiatan ini dilakukan dengan media elektronik. Namun, masih ada hambatan dan tantangan yang masih membuat penerapannya tidak ideal, berdasarkan aspek anonimitas, privasi, dan keandalan suatu sistem pemungutan suara. Hingga kini, berbagai metode, algoritma, dan tata cara pemungutan suara juga kian diteliti oleh orang-orang di dunia untuk mengatasi masalah-masalah pada metode yang sebelumnya sudah pernah diriset.
+
+
+\newpage
+\section*{Pustaka Utama}
+
+Tinjauan pustaka diambil dari beberapa pustaka utama sebagai berikut.
+
+\begin{enumerate}
+    \setlength\itemsep{-0.5em}
+    \item \cite{wang2017review} A review of contemporary e-voting: Requirements, technology, systems and usability
+    \item \cite{8651451} Trustworthy Electronic Voting Using Adjusted Blockchain Technology
+    \item \cite{koreanevoting} E-voting System Using Homomorphic Encryption and Blockchain Technology to Encrypt Voter Data
+    \item \cite{blockchainreview} Blockchain Technology: A Critical Review and Its Proposed Use in E-Voting in India
+    \item \cite{blockchain} Towards Secure E-Voting Using Ethereum Blockchain
+    \item \cite{comparitiveanalysis} A Comparitive Analysis on E-Voting System Using Blockchain
+    \item \cite{secretsharing} An Electronic Voting Scheme Using Secure Multi-Party Computation Based on Secret Sharing
+    \item \cite{sysreview} A Systematic Review of Challenges and Opportunities of Blockchain for E-Voting
+\end{enumerate}
+
+\bibliographystyle{apalike}
+\bibliography{bibliography.bib}
+
+\end{document}
